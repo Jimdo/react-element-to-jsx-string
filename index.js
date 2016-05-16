@@ -47,7 +47,7 @@ export default function reactElementToJSXString(ReactElement, options = {}) {
         out += `\n${spacer(lvl + 1)}`;
       }
 
-      if (attribute.value === '{true}') {
+      if (options.omitBools && attribute.value === '{true}') {
         out += `${attribute.name}`;
       } else {
         out += `${attribute.name}=${attribute.value}`;
@@ -95,7 +95,7 @@ export default function reactElementToJSXString(ReactElement, options = {}) {
     return Object
       .keys(props)
       .filter(noChildren)
-      .filter(prop => noFalse(props[prop]))
+      .filter(prop => !options.omitBools || noFalse(props[prop]))
       .sort()
       .map(propName => {
         return getJSXAttribute(propName, props[propName]);
