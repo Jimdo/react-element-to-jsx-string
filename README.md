@@ -62,10 +62,17 @@ console.log(reactElementToJSXString(<div a="1" b="2">Hello, world!</div>));
 ### reactElementToJSXString(ReactElement[, options])
 
 **options.displayName: function(ReactElement)**
-  
+
   Provide a different algorithm in charge of finding the right display name (name of the underlying Class) for your element.
 
   Just return the name you want for the provided ReactElement, as a string.
+
+**options.omitBools: boolean**
+
+  Omit boolean attribute values by removing attributes that are set to false and use the shorthand for attributes that are set to true.
+
+  Example:
+  ```reactElementToJSXString(<Button primary={true} secondary={false} />, {omitBools: true}) === '<Button primary />'```
 
 ## Test
 
